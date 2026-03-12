@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="All Express — Thailand's Logistics Infrastructure Platform. API Integration · Whitelabel · Master Franchise">
+<title>All Express — Logistics Infrastructure Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────── RESET & BASE ─────────────────────────── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg:        #0A0A0A;
+  --bg-1:      #111111;
+  --bg-2:      #161616;
+  --bg-3:      #1E1E1E;
+  --border:    rgba(255,255,255,.07);
+  --border-2:  rgba(255,255,255,.12);
+  --white:     #FFFFFF;
+  --off-white: #E8E8E8;
+  --muted:     #888888;
+  --muted-2:   #555555;
+  --gold:      #C8A96E;
+  --gold-dim:  rgba(200,169,110,.12);
+  --gold-line: rgba(200,169,110,.35);
+  --red:       #D32F2F;
+  --red-dim:   rgba(211,47,47,.12);
+  --green:     #4CAF50;
+  --blue:      #4FC3F7;
+  --ease:      cubic-bezier(.25,.46,.45,.94);
+  --r:         'Sarabun','Inter',sans-serif;
+  --mono:      'Inter',monospace;
+}
+html { scroll-behavior:smooth; }
+body {
+  font-family: var(--r);
+  background: var(--bg);
+  color: var(--off-white);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─────────────────────────── TYPOGRAPHY ─────────────────────────── */
+h1,h2,h3,h4,h5 { line-height:1.15; letter-spacing:-.01em; }
+a { color: inherit; text-decoration:none; }
+
+/* ─────────────────────────── NAV ─────────────────────────── */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:200;
+  padding: 0 40px;
+  height: 64px;
+  display: flex; align-items:center; justify-content:space-between;
+  background: rgba(10,10,10,.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: all .3s var(--ease);
+}
+.nav-logo {
+  display:flex; align-items:center; gap:10px;
+}
+.nav-logo .logotype {
+  font-family: var(--mono);
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: 1.5px;
+  color: var(--white);
+}
+.nav-logo .logotype span { color: var(--gold); }
+.nav-logo .badge {
+  font-size: 9px; font-weight: 700; letter-spacing: 2px;
+  text-transform:uppercase; color: var(--muted);
+  border: 1px solid var(--border-2); padding: 2px 8px;
+  border-radius: 4px;
+}
+.nav-links { display:flex; align-items:center; gap:32px; }
+.nav-links a {
+  font-size: 13px; font-weight: 500; color: var(--muted);
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  background: var(--gold); color: #0A0A0A;
+  font-size: 13px; font-weight: 700;
+  padding: 8px 20px; border-radius: 8px;
+  transition: opacity .2s, transform .2s;
+  display:inline-block;
+}
+.nav-cta:hover { opacity:.85; transform:translateY(-1px); }
+
+/* ─────────────────────────── HERO ─────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display:flex; align-items:center; justify-content:center;
+  padding: 120px 40px 80px;
+  position:relative; overflow:hidden;
+}
+
+/* Grid background */
+.hero::before {
+  content:'';
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(200,169,110,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,169,110,.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+
+/* Glow */
+.hero::after {
+  content:'';
+  position:absolute; top:-20%; left:50%; transform:translateX(-50%);
+  width:800px; height:800px; border-radius:50%;
+  background: radial-gradient(circle, rgba(200,169,110,.06) 0%, transparent 70%);
+  pointer-events:none;
+}
+
+.hero-inner {
+  max-width: 900px; width:100%;
+  text-align:center; position:relative; z-index:1;
+}
+
+.hero-eyebrow {
+  display:inline-flex; align-items:center; gap:8px;
+  border: 1px solid var(--gold-line);
+  background: var(--gold-dim);
+  padding: 6px 16px; border-radius: 100px;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform:uppercase;
+  color: var(--gold); margin-bottom: 28px;
+}
+.hero-eyebrow .dot {
+  width:6px; height:6px; border-radius:50%;
+  background:var(--gold); animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100%{ opacity:1; transform:scale(1); }
+  50%{ opacity:.5; transform:scale(1.4); }
+}
+
+.hero h1 {
+  font-size: clamp(40px, 7vw, 80px);
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 6px;
+  line-height: 1.08;
+}
+.hero h1 .gold { color: var(--gold); }
+.hero h1 .dim { color: var(--muted-2); font-weight:300; }
+
+.hero-tagline {
+  font-size: clamp(16px, 2vw, 21px);
+  color: var(--muted);
+  max-width: 620px; margin: 20px auto 40px;
+  line-height: 1.65;
+}
+.hero-tagline strong { color: var(--off-white); font-weight:600; }
+
+.hero-actions {
+  display:flex; align-items:center; justify-content:center;
+  gap:14px; flex-wrap:wrap; margin-bottom: 64px;
+}
+.btn-primary {
+  background: var(--gold); color: #0A0A0A;
+  font-size: 14px; font-weight: 700;
+  padding: 14px 28px; border-radius: 10px;
+  transition: opacity .2s, transform .2s; border:none; cursor:pointer;
+  display:inline-flex; align-items:center; gap:8px;
+}
+.btn-primary:hover { opacity:.85; transform:translateY(-2px); }
+.btn-secondary {
+  background: transparent; color: var(--off-white);
+  font-size: 14px; font-weight: 600;
+  padding: 13px 28px; border-radius: 10px;
+  border: 1px solid var(--border-2);
+  transition: border-color .2s, background .2s;
+  display:inline-flex; align-items:center; gap:8px;
+}
+.btn-secondary:hover { border-color: rgba(255,255,255,.3); background:rgba(255,255,255,.04); }
+
+/* Stat bar */
+.hero-stats {
+  display: flex; align-items:center; justify-content:center;
+  gap: 0; border: 1px solid var(--border);
+  background: var(--bg-1); border-radius: 16px;
+  overflow:hidden; flex-wrap:wrap;
+}
+.hero-stat {
+  padding: 22px 36px;
+  border-right: 1px solid var(--border);
+  flex:1; min-width:140px;
+}
+.hero-stat:last-child { border-right:none; }
+.hero-stat .val {
+  font-size: 26px; font-weight: 800;
+  font-family: var(--mono);
+  color: var(--white);
+}
+.hero-stat .val .unit { font-size:14px; color:var(--gold); font-weight:700; }
+.hero-stat .lbl { font-size: 12px; color: var(--muted); margin-top:2px; }
+
+/* ─────────────────────────── SECTION BASE ─────────────────────────── */
+.section { padding: 100px 40px; }
+.section-inner { max-width: 1080px; margin:0 auto; }
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 3px;
+  text-transform:uppercase; color: var(--gold); margin-bottom:10px;
+}
+.section-title {
+  font-size: clamp(28px, 4vw, 44px); font-weight: 800;
+  color: var(--white); margin-bottom:10px;
+}
+.section-sub {
+  font-size: 17px; color: var(--muted); max-width:560px;
+  line-height:1.65; margin-bottom:56px;
+}
+.divider { height:1px; background:var(--border); margin:0 auto 56px; max-width:1080px; }
+
+/* ─────────────────────────── WHAT WE OFFER ─────────────────────────── */
+.offer-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:2px;
+  background:var(--border); border-radius:20px; overflow:hidden;
+  margin-top:0;
+}
+.offer-card {
+  background:var(--bg-1); padding:40px 36px;
+  position:relative; overflow:hidden;
+  transition: background .25s;
+}
+.offer-card:hover { background:var(--bg-2); }
+.offer-card::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:2px;
+  background:transparent;
+  transition: background .25s;
+}
+.offer-card:hover::before { background:var(--gold); }
+
+.offer-icon {
+  width:52px; height:52px; border-radius:14px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:24px; margin-bottom:20px;
+}
+.icon-api  { background:rgba(79,195,247,.1); }
+.icon-wl   { background:rgba(200,169,110,.1); }
+.icon-fr   { background:rgba(211,47,47,.1); }
+
+.offer-card h3 { font-size:21px; font-weight:700; color:var(--white); margin-bottom:8px; }
+.offer-card .offer-sub { font-size:13px; color:var(--muted); margin-bottom:20px; line-height:1.6; }
+.offer-tag {
+  display:inline-block; font-size:10px; font-weight:700;
+  letter-spacing:1.5px; text-transform:uppercase;
+  padding:4px 10px; border-radius:6px; margin-bottom:20px;
+}
+.tag-api   { background:rgba(79,195,247,.12); color:#4FC3F7; }
+.tag-wl    { background:var(--gold-dim); color:var(--gold); }
+.tag-fr    { background:var(--red-dim); color:#EF5350; }
+
+.offer-features { list-style:none; }
+.offer-features li {
+  font-size:13px; color:var(--muted);
+  padding:8px 0; border-bottom:1px solid var(--border);
+  display:flex; align-items:flex-start; gap:10px;
+  transition:color .2s;
+}
+.offer-card:hover .offer-features li { color:var(--off-white); }
+.offer-features li:last-child { border-bottom:none; }
+.offer-features li .check { color:var(--gold); font-size:12px; margin-top:2px; flex-shrink:0; }
+
+/* ─────────────────────────── WHY SECTION ─────────────────────────── */
+.why-section { background:var(--bg-1); }
+.why-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:40px;
+  align-items:center;
+}
+.why-left .big-number {
+  font-size:120px; font-weight:900; font-family:var(--mono);
+  color:var(--bg-3); line-height:1; margin-bottom:-20px;
+  user-select:none;
+}
+.why-list { list-style:none; }
+.why-item {
+  display:flex; align-items:flex-start; gap:16px;
+  padding:20px 0; border-bottom:1px solid var(--border);
+}
+.why-item:first-child { padding-top:0; }
+.why-item:last-child { border-bottom:none; }
+.why-num {
+  font-size:11px; font-weight:700; color:var(--gold);
+  font-family:var(--mono); min-width:28px; margin-top:4px;
+}
+.why-item h4 { font-size:17px; font-weight:700; color:var(--white); margin-bottom:4px; }
+.why-item p  { font-size:13px; color:var(--muted); line-height:1.6; }
+
+/* ─────────────────────────── HOW IT WORKS ─────────────────────────── */
+.steps-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+  background:var(--border); border-radius:16px; overflow:hidden;
+}
+.step {
+  background:var(--bg-1); padding:36px 32px;
+  position:relative;
+}
+.step-num {
+  font-size:48px; font-weight:900; font-family:var(--mono);
+  color:var(--bg-3); line-height:1; margin-bottom:16px;
+  user-select:none;
+}
+.step h4 { font-size:18px; font-weight:700; color:var(--white); margin-bottom:8px; }
+.step p { font-size:13px; color:var(--muted); line-height:1.65; }
+.step-arrow {
+  position:absolute; top:50%; right:-1px;
+  width:24px; height:24px;
+  background:var(--bg-3); border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; color:var(--muted);
+  transform:translateY(-50%);
+  z-index:2;
+}
+.step:last-child .step-arrow { display:none; }
+
+/* ─────────────────────────── ECOSYSTEM ─────────────────────────── */
+.ecosystem-section { background:var(--bg-1); }
+.eco-center-wrap {
+  display:flex; flex-direction:column; align-items:center;
+  gap:48px;
+}
+.eco-hub {
+  background:var(--bg-2);
+  border:2px solid var(--gold-line);
+  border-radius:20px; padding:24px 40px;
+  text-align:center;
+  box-shadow:0 0 40px rgba(200,169,110,.08);
+}
+.eco-hub .hub-label {
+  font-size:10px; font-weight:700; letter-spacing:2.5px;
+  text-transform:uppercase; color:var(--gold); margin-bottom:4px;
+}
+.eco-hub .hub-name { font-size:22px; font-weight:800; color:var(--white); }
+.eco-hub .hub-url { font-size:12px; color:var(--muted); font-family:var(--mono); }
+
+.eco-spoke-row {
+  display:flex; flex-wrap:wrap; gap:12px;
+  justify-content:center; max-width:800px;
+}
+.eco-spoke {
+  display:flex; align-items:center; gap:10px;
+  background:var(--bg-2); border:1px solid var(--border);
+  border-radius:12px; padding:14px 20px;
+  transition:border-color .2s, transform .2s;
+}
+.eco-spoke:hover { border-color:var(--border-2); transform:translateY(-2px); }
+.eco-spoke .eco-icon { font-size:20px; }
+.eco-spoke .eco-name { font-size:13px; font-weight:600; color:var(--off-white); }
+.eco-spoke .eco-sub { font-size:11px; color:var(--muted); }
+
+/* ─────────────────────────── PARTNER TIERS ─────────────────────────── */
+.tier-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
+}
+.tier-card {
+  background:var(--bg-1); border:1px solid var(--border);
+  border-radius:18px; padding:32px 28px;
+  position:relative; overflow:hidden;
+  transition:border-color .25s, transform .25s;
+}
+.tier-card:hover { border-color:var(--border-2); transform:translateY(-3px); }
+.tier-card.featured {
+  border-color:var(--gold-line);
+  background:linear-gradient(135deg,rgba(200,169,110,.06),var(--bg-1));
+}
+.tier-card.featured::before {
+  content:'★ Recommended';
+  position:absolute; top:16px; right:16px;
+  font-size:10px; font-weight:700; letter-spacing:1px;
+  color:var(--gold); text-transform:uppercase;
+}
+.tier-num {
+  font-size:11px; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; color:var(--muted); margin-bottom:6px;
+}
+.tier-name { font-size:22px; font-weight:800; color:var(--white); margin-bottom:6px; }
+.tier-desc { font-size:13px; color:var(--muted); margin-bottom:24px; line-height:1.6; }
+.tier-perks { list-style:none; margin-bottom:28px; }
+.tier-perks li {
+  font-size:13px; color:var(--muted); padding:7px 0;
+  border-bottom:1px solid var(--border);
+  display:flex; gap:10px;
+  transition:color .2s;
+}
+.tier-card:hover .tier-perks li { color:var(--off-white); }
+.tier-perks li:last-child { border-bottom:none; }
+.tier-perks li::before { content:'→'; color:var(--gold); flex-shrink:0; }
+.tier-cta {
+  display:block; text-align:center;
+  padding:11px 20px; border-radius:9px;
+  font-size:13px; font-weight:700;
+  border:1px solid var(--border-2); color:var(--off-white);
+  transition:border-color .2s, background .2s;
+}
+.tier-card:hover .tier-cta { border-color:var(--gold-line); background:var(--gold-dim); color:var(--gold); }
+.tier-card.featured .tier-cta {
+  background:var(--gold); color:#0A0A0A; border:none;
+}
+
+/* ─────────────────────────── INTEGRATION STRIP ─────────────────────────── */
+.integration-section { background:var(--bg-1); padding:60px 40px; }
+.integration-label {
+  text-align:center; font-size:11px; font-weight:700;
+  letter-spacing:3px; text-transform:uppercase;
+  color:var(--muted-2); margin-bottom:32px;
+}
+.carrier-strip {
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+  gap:8px; max-width:880px; margin:0 auto;
+}
+.carrier-pill {
+  background:var(--bg-2); border:1px solid var(--border);
+  border-radius:8px; padding:8px 18px;
+  font-size:13px; font-weight:600; color:var(--muted);
+  transition:border-color .2s, color .2s;
+}
+.carrier-pill:hover { border-color:var(--border-2); color:var(--off-white); }
+
+/* ─────────────────────────── CTA SECTION ─────────────────────────── */
+.cta-section {
+  padding:100px 40px;
+  position:relative; overflow:hidden; text-align:center;
+}
+.cta-section::before {
+  content:'';
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:600px; height:600px; border-radius:50%;
+  background:radial-gradient(circle, rgba(200,169,110,.07) 0%, transparent 70%);
+  pointer-events:none;
+}
+.cta-section::after {
+  content:'';
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(200,169,110,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,169,110,.025) 1px, transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+}
+.cta-inner { position:relative; z-index:1; max-width:640px; margin:0 auto; }
+.cta-section .section-label { display:block; text-align:center; margin-bottom:16px; }
+.cta-section h2 {
+  font-size:clamp(32px,5vw,54px); font-weight:800;
+  color:var(--white); margin-bottom:16px;
+}
+.cta-section h2 span { color:var(--gold); }
+.cta-section p { font-size:17px; color:var(--muted); margin-bottom:40px; line-height:1.65; }
+.cta-row { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+
+/* Contact chip */
+.contact-chip {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--bg-2); border:1px solid var(--border);
+  padding:10px 18px; border-radius:100px;
+  font-size:13px; color:var(--muted);
+  transition:border-color .2s, color .2s;
+}
+.contact-chip:hover { border-color:var(--gold-line); color:var(--gold); }
+
+/* ─────────────────────────── FOOTER ─────────────────────────── */
+footer {
+  background:var(--bg-1); border-top:1px solid var(--border);
+  padding:48px 40px 36px;
+}
+.footer-inner {
+  max-width:1080px; margin:0 auto;
+  display:flex; justify-content:space-between; align-items:flex-start;
+  flex-wrap:wrap; gap:32px;
+}
+.footer-brand .logotype {
+  font-family:var(--mono); font-weight:800;
+  font-size:17px; letter-spacing:1.5px; color:var(--white);
+}
+.footer-brand .logotype span { color:var(--gold); }
+.footer-brand p { font-size:12px; color:var(--muted-2); margin-top:6px; }
+.footer-links { display:flex; gap:24px; flex-wrap:wrap; }
+.footer-links a { font-size:13px; color:var(--muted-2); transition:color .2s; }
+.footer-links a:hover { color:var(--gold); }
+.footer-bottom {
+  max-width:1080px; margin:32px auto 0;
+  padding-top:24px; border-top:1px solid var(--border);
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  font-size:12px; color:var(--muted-2);
+}
+
+/* ─────────────────────────── MOBILE ─────────────────────────── */
+@media(max-width:768px) {
+  nav { padding:0 20px; }
+  .nav-links { display:none; }
+  .hero, .section, .cta-section { padding-left:20px; padding-right:20px; }
+  .hero { min-height:auto; padding-top:100px; }
+  .offer-grid, .steps-grid, .tier-grid, .why-grid { grid-template-columns:1fr; }
+  .hero-stat { padding:18px 20px; }
+  .hero-stats { display:grid; grid-template-columns:1fr 1fr; }
+  .integration-section { padding:48px 20px; }
+  footer { padding:40px 20px 28px; }
+}
+
+/* ─────────────────────────── SCROLL ANIMATIONS ─────────────────────────── */
+.fade-in {
+  opacity:0; transform:translateY(24px);
+  transition:opacity .6s var(--ease), transform .6s var(--ease);
+}
+.fade-in.visible { opacity:1; transform:translateY(0); }
+
+/* ─────────────────────────── ANNOUNCEMENT BAR ─────────────────────────── */
+.announcement {
+  background:linear-gradient(90deg,var(--gold-dim),rgba(200,169,110,.06),var(--gold-dim));
+  border-bottom:1px solid var(--gold-line);
+  padding:10px 40px; text-align:center;
+  font-size:12px; font-weight:600; color:var(--gold);
+  letter-spacing:.5px;
+}
+.announcement a { text-decoration:underline; text-underline-offset:2px; opacity:.75; }
+.announcement a:hover { opacity:1; }
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div class="announcement">
+  🚀 &nbsp;Now accepting Master Partner applications for 2026 — &nbsp;<a href="#contact">Apply now →</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="logotype">ALL<span>EXPRESS</span></div>
+    <div class="badge">.ltd</div>
+  </div>
+  <div class="nav-links">
+    <a href="#offer">Solutions</a>
+    <a href="#how">How It Works</a>
+    <a href="#ecosystem">Ecosystem</a>
+    <a href="#partners">Partners</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="#contact" class="nav-cta">Become a Partner</a>
+</nav>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <div class="dot"></div>
+      Thailand Logistics Infrastructure
+    </div>
+
+    <h1>
+      The Platform<br>
+      <span class="gold">Behind the Shipment</span>
+    </h1>
+
+    <p class="hero-tagline">
+      All Express คือ <strong>logistics infrastructure layer</strong> สำหรับองค์กรที่ต้องการ
+      ระบบขนส่งที่แข็งแกร่ง — ไม่ว่าจะเป็น API Integration,
+      Whitelabel Platform หรือ Master Franchise
+    </p>
+
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        ✦ &nbsp;Become a Partner
+      </a>
+      <a href="#offer" class="btn-secondary">
+        Explore Solutions &nbsp;→
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="val">8<span class="unit">+</span></div>
+        <div class="lbl">Carrier Integrations</div>
+      </div>
+      <div class="hero-stat">
+        <div class="val">3<span class="unit"> tiers</span></div>
+        <div class="lbl">Partner Structure</div>
+      </div>
+      <div class="hero-stat">
+        <div class="val">5<span class="unit"> eco</span></div>
+        <div class="lbl">ALL Ecosystem Access</div>
+      </div>
+      <div class="hero-stat">
+        <div class="val">T<span class="unit">+0</span></div>
+        <div class="lbl">COD Settlement</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ WHAT WE OFFER ═══════════════════ -->
+<div class="divider" style="margin-top:0;"></div>
+<section class="section" id="offer">
+  <div class="section-inner">
+    <div class="section-label">Solutions</div>
+    <h2 class="section-title">3 Ways to Partner</h2>
+    <p class="section-sub">เลือกรูปแบบที่เหมาะกับธุรกิจของคุณ — ทุก model วิ่งบน infrastructure เดียวกัน</p>
+
+    <div class="offer-grid fade-in">
+
+      <!-- API -->
+      <div class="offer-card">
+        <div class="offer-icon icon-api">🔌</div>
+        <span class="offer-tag tag-api">API Integration</span>
+        <h3>API Partner</h3>
+        <p class="offer-sub">
+          Connect ระบบของคุณเข้ากับ All Express Logistics API — รองรับ multi-carrier booking,
+          real-time tracking และ COD management ผ่าน REST API เดียว
+        </p>
+        <ul class="offer-features">
+          <li><span class="check">✓</span>Multi-carrier booking (8+ carriers)</li>
+          <li><span class="check">✓</span>Real-time tracking & webhook</li>
+          <li><span class="check">✓</span>COD collection & settlement</li>
+          <li><span class="check">✓</span>Address validation API</li>
+          <li><span class="check">✓</span>Rate comparison engine</li>
+          <li><span class="check">✓</span>SLA monitoring dashboard</li>
+        </ul>
+      </div>
+
+      <!-- Whitelabel -->
+      <div class="offer-card">
+        <div class="offer-icon icon-wl">🏷️</div>
+        <span class="offer-tag tag-wl">Whitelabel</span>
+        <h3>Whitelabel Platform</h3>
+        <p class="offer-sub">
+          ได้ platform logistics ครบวงจรในชื่อแบรนด์ของคุณ — ระบบ booking, tracking,
+          franchise management และ analytics ทั้งหมด — powered by All Express
+        </p>
+        <ul class="offer-features">
+          <li><span class="check">✓</span>Full platform under your brand</li>
+          <li><span class="check">✓</span>Custom domain + mobile app</li>
+          <li><span class="check">✓</span>Franchise management suite</li>
+          <li><span class="check">✓</span>OMS + WMS integration</li>
+          <li><span class="check">✓</span>Analytics & BI dashboard</li>
+          <li><span class="check">✓</span>Dedicated support</li>
+        </ul>
+      </div>
+
+      <!-- Franchise -->
+      <div class="offer-card">
+        <div class="offer-icon icon-fr">🏪</div>
+        <span class="offer-tag tag-fr">Master Franchise</span>
+        <h3>Master Partner</h3>
+        <p class="offer-sub">
+          รับสิทธิ์เป็น Master Partner ใน Region หรือ Category ของคุณ —
+          Recruit sub-franchisees ส่งไว และ earn จาก volume
+          ของ network ที่คุณสร้าง
+        </p>
+        <ul class="offer-features">
+          <li><span class="check">✓</span>Exclusive territory rights</li>
+          <li><span class="check">✓</span>Recruit & manage sub-franchisees</li>
+          <li><span class="check">✓</span>Revenue share from sub-network</li>
+          <li><span class="check">✓</span>ส่งไว brand + materials</li>
+          <li><span class="check">✓</span>Training & onboarding system</li>
+          <li><span class="check">✓</span>Partner council membership</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ WHY ═══════════════════ -->
+<section class="section why-section" id="why">
+  <div class="section-inner">
+    <div class="why-grid fade-in">
+      <div class="why-left">
+        <div class="section-label">Why All Express</div>
+        <h2 class="section-title" style="margin-bottom:20px;">Infrastructure ที่<br>คู่แข่งสร้างตาม<br>ได้ยาก</h2>
+        <p style="font-size:15px; color:var(--muted); line-height:1.7;">
+          เราไม่ได้สร้างแค่ระบบส่งพัสดุ —
+          เราสร้าง <strong style="color:var(--off-white);">logistics scheme</strong>
+          ที่รวม physical network, digital platform, financial layer
+          และ ecosystem ไว้ในที่เดียว
+        </p>
+      </div>
+      <div class="why-right">
+        <ul class="why-list">
+          <li class="why-item">
+            <div class="why-num">01</div>
+            <div>
+              <h4>Aggregated Carrier Power</h4>
+              <p>Volume รวมจาก partner network ทั้งหมด = rate ที่ดีกว่าการ negotiate เดี่ยว — ทุก partner ได้ประโยชน์จาก scale ของ network</p>
+            </div>
+          </li>
+          <li class="why-item">
+            <div class="why-num">02</div>
+            <div>
+              <h4>Licensed Financial Layer</h4>
+              <p>All Wallet (BOT licensed) + All ID (eKYC/Sumsub) — infrastructure ที่ไม่ใช่ทุกรายจะ build ได้เอง หรือต้องใช้เวลาและเงินมาก</p>
+            </div>
+          </li>
+          <li class="why-item">
+            <div class="why-num">03</div>
+            <div>
+              <h4>ALL Ecosystem Access</h4>
+              <p>Connect กับ 5 ecosystems — Travel, Education, Health, Business, Living — logistics partner ของคุณมี ecosystem ที่ cross-sell ได้ทันที</p>
+            </div>
+          </li>
+          <li class="why-item">
+            <div class="why-num">04</div>
+            <div>
+              <h4>Partner-First Economics</h4>
+              <p>เราเงินจาก transaction — ไม่ใช่จากการเก็บ fee หนักๆ จาก partner คุณวินก่อน เราวินเมื่อ network scale</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ HOW IT WORKS ═══════════════════ -->
+<div class="divider"></div>
+<section class="section" id="how">
+  <div class="section-inner">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">3 Steps to Launch</h2>
+    <p class="section-sub">จาก conversation สู่ go-live ใน 30–60 วัน</p>
+
+    <div class="steps-grid fade-in">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h4>Partner Briefing</h4>
+        <p>คุยกับทีมเราเพื่อเลือก model ที่เหมาะ — API, Whitelabel หรือ Master Franchise — และ define scope, territory หรือ integration ที่ต้องการ</p>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h4>Agreement & Setup</h4>
+        <p>Sign Partner Agreement → รับ credentials, access, และ onboarding package — สำหรับ Whitelabel: deploy ภายใน 2 สัปดาห์</p>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h4>Go Live & Grow</h4>
+        <p>Launch พร้อม support จากทีม All Express — monitor performance ผ่าน partner dashboard — scale เมื่อ volume เติบโต</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CARRIERS ═══════════════════ -->
+<div class="integration-section">
+  <div class="integration-label">Carrier Network — Connected Out of the Box</div>
+  <div class="carrier-strip">
+    <div class="carrier-pill">Flash Express</div>
+    <div class="carrier-pill">Kerry Express</div>
+    <div class="carrier-pill">J&T Express</div>
+    <div class="carrier-pill">Thai Post (EMS)</div>
+    <div class="carrier-pill">Ninja Van</div>
+    <div class="carrier-pill">CJ Logistics</div>
+    <div class="carrier-pill">Sendit</div>
+    <div class="carrier-pill">DHL Express</div>
+    <div class="carrier-pill">+ more</div>
+  </div>
+</div>
+
+<!-- ═══════════════════ ECOSYSTEM ═══════════════════ -->
+<div class="divider"></div>
+<section class="section ecosystem-section" id="ecosystem">
+  <div class="section-inner">
+    <div style="text-align:center; margin-bottom:52px;" class="fade-in">
+      <div class="section-label" style="text-align:center;">Ecosystem</div>
+      <h2 class="section-title">ส่วนหนึ่งของ ALL Ecosystem</h2>
+      <p class="section-sub" style="max-width:520px; margin:10px auto 0;">
+        All Express ไม่ได้ยืนอยู่คนเดียว — เป็น infrastructure layer
+        ของ ecosystem 5 ตัวที่ทำงานร่วมกัน
+      </p>
+    </div>
+
+    <div class="eco-center-wrap fade-in">
+      <div class="eco-hub">
+        <div class="hub-label">Infrastructure</div>
+        <div class="hub-name">All Express</div>
+        <div class="hub-url">allexpress.ltd</div>
+      </div>
+
+      <div class="eco-spoke-row">
+        <div class="eco-spoke">
+          <div class="eco-icon">✈️</div>
+          <div>
+            <div class="eco-name">All Travel</div>
+            <div class="eco-sub">One Wallet · Tourist</div>
+          </div>
+        </div>
+        <div class="eco-spoke">
+          <div class="eco-icon">🎓</div>
+          <div>
+            <div class="eco-name">All Education</div>
+            <div class="eco-sub">University App</div>
+          </div>
+        </div>
+        <div class="eco-spoke">
+          <div class="eco-icon">💊</div>
+          <div>
+            <div class="eco-name">All Health</div>
+            <div class="eco-sub">Healthcare Delivery</div>
+          </div>
+        </div>
+        <div class="eco-spoke">
+          <div class="eco-icon">📦</div>
+          <div>
+            <div class="eco-name">All Business</div>
+            <div class="eco-sub">ส่งไว · SME</div>
+          </div>
+        </div>
+        <div class="eco-spoke">
+          <div class="eco-icon">🏠</div>
+          <div>
+            <div class="eco-name">All Living</div>
+            <div class="eco-sub">StayVerse · Property</div>
+          </div>
+        </div>
+        <div class="eco-spoke">
+          <div class="eco-icon">💳</div>
+          <div>
+            <div class="eco-name">All Wallet</div>
+            <div class="eco-sub">BOT Licensed · eWallet</div>
+          </div>
+        </div>
+        <div class="eco-spoke">
+          <div class="eco-icon">🪪</div>
+          <div>
+            <div class="eco-name">All ID</div>
+            <div class="eco-sub">KYC · eKYC · Sumsub</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ PARTNER TIERS ═══════════════════ -->
+<div class="divider"></div>
+<section class="section" id="partners">
+  <div class="section-inner">
+    <div class="section-label">Partner Tiers</div>
+    <h2 class="section-title">Choose Your Level</h2>
+    <p class="section-sub">ทุก tier วิ่งบน infrastructure เดียวกัน — ความแตกต่างคือ rights, territory และ earning potential</p>
+
+    <div class="tier-grid fade-in">
+
+      <div class="tier-card">
+        <div class="tier-num">Tier 2</div>
+        <div class="tier-name">API / Platform<br>Partner</div>
+        <p class="tier-desc">สำหรับ platform, marketplace, หรือ ERP ที่ต้องการ logistics backend</p>
+        <ul class="tier-perks">
+          <li>Full API access + documentation</li>
+          <li>Transaction-based pricing</li>
+          <li>Technical onboarding support</li>
+          <li>Webhook + real-time events</li>
+          <li>Monthly usage reports</li>
+        </ul>
+        <a href="#contact" class="tier-cta">Talk to Us</a>
+      </div>
+
+      <div class="tier-card featured">
+        <div class="tier-num">Tier 1</div>
+        <div class="tier-name">Master<br>Partner</div>
+        <p class="tier-desc">สำหรับองค์กรที่ต้องการ build logistics distribution network ใน region ของตัวเอง</p>
+        <ul class="tier-perks">
+          <li>Exclusive territory rights</li>
+          <li>Recruit & manage sub-franchisees</li>
+          <li>Revenue share from sub-network</li>
+          <li>ส่งไว brand licensing</li>
+          <li>Partner council seat</li>
+          <li>Priority carrier rates</li>
+        </ul>
+        <a href="#contact" class="tier-cta">Apply Now</a>
+      </div>
+
+      <div class="tier-card">
+        <div class="tier-num">Whitelabel</div>
+        <div class="tier-name">Your Brand,<br>Our Engine</div>
+        <p class="tier-desc">สำหรับองค์กรที่ต้องการ logistics platform ในชื่อแบรนด์ของตัวเอง</p>
+        <ul class="tier-perks">
+          <li>Full platform under your brand</li>
+          <li>Custom domain + app</li>
+          <li>All carrier integrations</li>
+          <li>Franchise management tools</li>
+          <li>Dedicated account manager</li>
+        </ul>
+        <a href="#contact" class="tier-cta">Get a Demo</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CTA ═══════════════════ -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner fade-in">
+    <span class="section-label">Ready to Partner?</span>
+    <h2>Let's Build<br><span>Together</span></h2>
+    <p>
+      ไม่ว่าคุณจะเป็น platform ที่ต้องการ logistics API,
+      องค์กรที่ต้องการ whitelabel หรือ investor ที่สนใจ Master Franchise —
+      เราพร้อมคุยครับ
+    </p>
+    <div class="cta-row">
+      <a href="mailto:partner@allexpress.ltd" class="btn-primary">
+        ✉ &nbsp;partner@allexpress.ltd
+      </a>
+      <a href="https://line.me/ti/p/~allexpress" class="btn-secondary">
+        LINE: @allexpress
+      </a>
+    </div>
+
+    <div style="display:flex; gap:12px; justify-content:center; margin-top:24px; flex-wrap:wrap;">
+      <div class="contact-chip">🇹🇭 &nbsp;Based in Bangkok</div>
+      <div class="contact-chip">⚡ &nbsp;Response within 24h</div>
+      <div class="contact-chip">🤝 &nbsp;NDA available on request</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logotype">ALL<span>EXPRESS</span></div>
+      <p>Logistics Infrastructure Platform<br>allexpress.ltd</p>
+    </div>
+    <div class="footer-links">
+      <a href="#offer">Solutions</a>
+      <a href="#ecosystem">Ecosystem</a>
+      <a href="#partners">Partners</a>
+      <a href="mailto:partner@allexpress.ltd">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 All Express · One Scheme Digital · All rights reserved</span>
+    <span>allexpress.ltd &nbsp;·&nbsp; Bangkok, Thailand</span>
+  </div>
+</footer>
+
+<!-- ═══════════════════ SCROLL ANIMATION ═══════════════════ -->
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Nav scroll effect
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 40) {
+    nav.style.background = 'rgba(10,10,10,0.97)';
+  } else {
+    nav.style.background = 'rgba(10,10,10,0.85)';
+  }
+});
+</script>
+
+</body>
+</html>
