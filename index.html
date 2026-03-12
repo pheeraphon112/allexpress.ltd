@@ -763,6 +763,235 @@ footer {
   </div>
 </div>
 
+<!-- ═══════════════════ THE SCHEME ═══════════════════ -->
+<div class="divider"></div>
+<section class="section" id="scheme" style="background:var(--bg-1);">
+  <div class="section-inner">
+    <div style="text-align:center; margin-bottom:52px;" class="fade-in">
+      <div class="section-label" style="text-align:center;">Architecture</div>
+      <h2 class="section-title">The Scheme Model</h2>
+      <p class="section-sub" style="max-width:540px; margin:10px auto 0;">
+        All Express ทำงานเหมือน Visa / Mastercard — คุมกติกา ต้นทุน และระบบ
+        ส่วน distribution ปล่อยให้ partner network ทำตลาด
+      </p>
+    </div>
+    <div class="scheme-diagram fade-in">
+      <!-- Layer 0 — Carriers -->
+      <div class="scheme-layer layer-0">
+        <div class="scheme-layer-label">Layer 0 · External Carriers</div>
+        <div class="scheme-carriers-row">
+          <div class="scheme-carrier">⚡ Flash</div>
+          <div class="scheme-carrier">🟢 Kerry</div>
+          <div class="scheme-carrier">🔴 J&T</div>
+          <div class="scheme-carrier">📮 ไปรษณีย์</div>
+          <div class="scheme-carrier">🟣 Ninja Van</div>
+          <div class="scheme-carrier">+ 3 more</div>
+        </div>
+      </div>
+      <!-- Arrow down -->
+      <div class="scheme-arrow">
+        <div class="scheme-arrow-line"></div>
+        <div class="scheme-arrow-label">Rate Aggregation · Contract Management</div>
+        <div class="scheme-arrow-tip">▼</div>
+      </div>
+      <!-- Layer 1 — All Express Core -->
+      <div class="scheme-layer layer-1">
+        <div class="scheme-layer-label">Layer 1 · All Express Infrastructure <span style="color:var(--gold);">(Owned)</span></div>
+        <div class="scheme-core-grid">
+          <div class="scheme-core-item">
+            <div class="sci-icon">🔌</div>
+            <div class="sci-name">Routing Engine</div>
+            <div class="sci-sub">Multi-carrier API</div>
+          </div>
+          <div class="scheme-core-item">
+            <div class="sci-icon">💳</div>
+            <div class="sci-name">All Wallet</div>
+            <div class="sci-sub">BOT Licensed · COD Float</div>
+          </div>
+          <div class="scheme-core-item">
+            <div class="sci-icon">🪪</div>
+            <div class="sci-name">All ID</div>
+            <div class="sci-sub">KYC / eKYC</div>
+          </div>
+          <div class="scheme-core-item">
+            <div class="sci-icon">📊</div>
+            <div class="sci-name">Analytics</div>
+            <div class="sci-sub">BI · SLA Monitor</div>
+          </div>
+        </div>
+      </div>
+      <!-- Arrow down -->
+      <div class="scheme-arrow">
+        <div class="scheme-arrow-line"></div>
+        <div class="scheme-arrow-label">API · Whitelabel · Franchise Rights</div>
+        <div class="scheme-arrow-tip">▼</div>
+      </div>
+      <!-- Layer 2 — Distribution -->
+      <div class="scheme-layer layer-2">
+        <div class="scheme-layer-label">Layer 2 · Distribution <span style="color:#EF5350;">(Partners Operate)</span></div>
+        <div class="scheme-dist-row">
+          <div class="scheme-dist-item">
+            <div class="sdi-tag" style="background:rgba(79,195,247,.12);color:#4FC3F7;">API Partner</div>
+            <div class="sdi-name">Platform / OMS</div>
+            <div class="sdi-sub">ต่อ API เข้าระบบของตัวเอง</div>
+          </div>
+          <div class="scheme-dist-item highlighted">
+            <div class="sdi-tag" style="background:var(--red-dim);color:#EF5350;">ส่งไว Brand</div>
+            <div class="sdi-name">Master → Sub Franchise</div>
+            <div class="sdi-sub">Physical drop-off network</div>
+          </div>
+          <div class="scheme-dist-item">
+            <div class="sdi-tag" style="background:var(--gold-dim);color:var(--gold);">Whitelabel</div>
+            <div class="sdi-name">Your Brand Platform</div>
+            <div class="sdi-sub">Powered by All Express</div>
+          </div>
+        </div>
+      </div>
+      <!-- Arrow down -->
+      <div class="scheme-arrow">
+        <div class="scheme-arrow-line"></div>
+        <div class="scheme-arrow-label">Services · Drop-off · Tracking · COD</div>
+        <div class="scheme-arrow-tip">▼</div>
+      </div>
+      <!-- Layer 3 — End Users -->
+      <div class="scheme-layer layer-3">
+        <div class="scheme-layer-label">Layer 3 · End Users</div>
+        <div class="scheme-users-row">
+          <div class="scheme-user">👤 ลูกค้าทั่วไป</div>
+          <div class="scheme-user">🛒 Online Sellers</div>
+          <div class="scheme-user">🏢 SME / Enterprise</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.scheme-diagram {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.scheme-layer {
+  border-radius: 16px;
+  padding: 24px 28px;
+  border: 1px solid var(--border);
+}
+.scheme-layer-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+.layer-0 { background: var(--bg-2); }
+.layer-1 { background: linear-gradient(135deg, rgba(200,169,110,.06), var(--bg-2)); border-color: var(--gold-line); }
+.layer-2 { background: var(--bg-2); }
+.layer-3 { background: var(--bg-2); }
+.scheme-carriers-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.scheme-carrier {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.scheme-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 4px 0;
+}
+.scheme-arrow-line {
+  width: 1px;
+  height: 16px;
+  background: var(--gold-line);
+}
+.scheme-arrow-label {
+  font-size: 10px;
+  color: var(--muted-2);
+  letter-spacing: 0.5px;
+  padding: 4px 12px;
+  background: var(--gold-dim);
+  border-radius: 100px;
+  color: var(--gold);
+  font-weight: 600;
+}
+.scheme-arrow-tip {
+  color: var(--gold-line);
+  font-size: 12px;
+  margin-top: -2px;
+}
+.scheme-core-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.scheme-core-item {
+  background: var(--bg-3);
+  border-radius: 12px;
+  padding: 16px 14px;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+.sci-icon { font-size: 20px; margin-bottom: 8px; }
+.sci-name { font-size: 13px; font-weight: 700; color: var(--off-white); margin-bottom: 3px; }
+.sci-sub  { font-size: 11px; color: var(--muted); }
+.scheme-dist-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.scheme-dist-item {
+  background: var(--bg-3);
+  border-radius: 12px;
+  padding: 16px 14px;
+  border: 1px solid var(--border);
+}
+.scheme-dist-item.highlighted { border-color: rgba(211,47,47,.35); }
+.sdi-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 5px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.sdi-name { font-size: 13px; font-weight: 700; color: var(--off-white); margin-bottom: 4px; }
+.sdi-sub  { font-size: 11px; color: var(--muted); }
+.scheme-users-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.scheme-user {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 9px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+@media(max-width:768px) {
+  .scheme-core-grid { grid-template-columns: repeat(2,1fr); }
+  .scheme-dist-row  { grid-template-columns: 1fr; }
+}
+</style>
+
 <!-- ═══════════════════ ECOSYSTEM ═══════════════════ -->
 <div class="divider"></div>
 <section class="section ecosystem-section" id="ecosystem">
@@ -905,19 +1134,58 @@ footer {
       องค์กรที่ต้องการ whitelabel หรือ investor ที่สนใจ Master Franchise —
       เราพร้อมคุยครับ
     </p>
-    <div class="cta-row">
-      <a href="mailto:partner@allexpress.ltd" class="btn-primary">
-        ✉ &nbsp;partner@allexpress.ltd
-      </a>
-      <a href="https://line.me/ti/p/~allexpress" class="btn-secondary">
-        LINE: @allexpress
-      </a>
-    </div>
+    <!-- Contact Form -->
+    <form class="partner-form" onsubmit="handleForm(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Company / Organization</label>
+          <input type="text" placeholder="บริษัท / ชื่อองค์กร" required>
+        </div>
+        <div class="form-group">
+          <label>Contact Name</label>
+          <input type="text" placeholder="ชื่อ-นามสกุล" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="email@company.com" required>
+        </div>
+        <div class="form-group">
+          <label>Phone / LINE ID</label>
+          <input type="text" placeholder="0812345678 / LINE ID">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Partnership Interest</label>
+        <select>
+          <option value="">— เลือกประเภท Partnership —</option>
+          <option>API Integration Partner</option>
+          <option>Whitelabel Platform</option>
+          <option>Master Franchise Partner</option>
+          <option>ส่งไว Sub-Franchise</option>
+          <option>Other / Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tell us about your business</label>
+        <textarea rows="3" placeholder="ธุรกิจของคุณ และสิ่งที่คาดหวังจากความร่วมมือ..."></textarea>
+      </div>
+      <div style="text-align:center; margin-top:8px;">
+        <button type="submit" class="btn-primary" style="font-size:15px; padding:15px 40px;">
+          ✦ &nbsp;ส่งใบสมัคร Partner
+        </button>
+        <p id="form-success" style="display:none; color:var(--gold); margin-top:16px; font-size:14px;">
+          ✓ ได้รับใบสมัครแล้ว ทีมงานจะติดต่อกลับภายใน 24 ชั่วโมง
+        </p>
+      </div>
+    </form>
 
-    <div style="display:flex; gap:12px; justify-content:center; margin-top:24px; flex-wrap:wrap;">
-      <div class="contact-chip">🇹🇭 &nbsp;Based in Bangkok</div>
+    <div style="display:flex; gap:12px; justify-content:center; margin-top:32px; flex-wrap:wrap;">
+      <a href="mailto:partner@allexpress.ltd" class="contact-chip">✉ &nbsp;partner@allexpress.ltd</a>
+      <a href="https://line.me/ti/p/~allexpress" class="contact-chip">💬 &nbsp;LINE: @allexpress</a>
       <div class="contact-chip">⚡ &nbsp;Response within 24h</div>
-      <div class="contact-chip">🤝 &nbsp;NDA available on request</div>
+      <div class="contact-chip">🤝 &nbsp;NDA on request</div>
     </div>
   </div>
 </section>
@@ -927,7 +1195,7 @@ footer {
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="logotype">ALL<span>EXPRESS</span></div>
-      <p>Logistics Infrastructure Platform<br>allexpress.ltd</p>
+      <p>Logistics Infrastructure Platform<br>allexpress.ltd · Bangkok, Thailand</p>
     </div>
     <div class="footer-links">
       <a href="#offer">Solutions</a>
@@ -937,12 +1205,75 @@ footer {
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 All Express · One Scheme Digital · All rights reserved</span>
+    <span>© 2026 All Express · All rights reserved</span>
     <span>allexpress.ltd &nbsp;·&nbsp; Bangkok, Thailand</span>
   </div>
 </footer>
 
 <!-- ═══════════════════ SCROLL ANIMATION ═══════════════════ -->
+<style>
+.partner-form {
+  max-width: 640px;
+  margin: 0 auto 0;
+  background: var(--bg-2);
+  border: 1px solid var(--border-2);
+  border-radius: 20px;
+  padding: 36px;
+  text-align: left;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.form-group label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: var(--bg-3);
+  border: 1px solid var(--border-2);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-family: var(--r);
+  color: var(--off-white);
+  outline: none;
+  transition: border-color .2s;
+  width: 100%;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--muted-2);
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--gold-line);
+}
+.form-group select option { background: var(--bg-3); }
+.form-group textarea { resize: vertical; min-height: 80px; }
+@media(max-width:600px) { .form-row { grid-template-columns: 1fr; } }
+</style>
+<script>
+function handleForm(e) {
+  e.preventDefault();
+  document.getElementById('form-success').style.display = 'block';
+  e.target.querySelectorAll('input,select,textarea').forEach(el => el.value = '');
+}
+</script>
 <script>
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
